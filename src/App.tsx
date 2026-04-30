@@ -147,7 +147,7 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-brand-black">
+      <section className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden bg-brand-black">
         {/* Decorative Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
           <div className="absolute -top-1/4 -right-1/4 w-[600px] h-[600px] bg-brand-gold/20 blur-[120px] rounded-full"></div>
@@ -307,47 +307,34 @@ export default function App() {
             </motion.p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-12">
-            <motion.div {...fadeIn} className="lg:col-span-1">
-              <div className="bg-brand-black text-white p-8 rounded-[2rem] h-full shadow-2xl">
-                <h3 className="text-2xl font-bold text-brand-gold mb-6 uppercase tracking-wider">Distribuição De:</h3>
-                <ul className="grid grid-cols-1 gap-3 text-sm font-medium">
-                  {[
-                    "Mangueiras de Sucção e Rega",
-                    "Adubos e Fertilizantes",
-                    "Sementes Agrícolas",
-                    "Catanas e Enxadas",
-                    "Pulverizadores",
-                    "Botas e Luvas de Campo",
-                    "Ancinho e Picareta",
-                    "Machados e Carros de Mão",
-                    "Moto Bombas (Diversos Modelos)"
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-gray-300">
-                      <div className="w-1.5 h-1.5 bg-brand-gold rounded-full"></div>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-
-            <motion.div {...fadeIn} className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-4">
-              {[
-                { img: "https://images.unsplash.com/photo-1558444458-36940003046f?auto=format&fit=crop&q=80&w=400", label: "Sistemas de Rega" },
-                { img: "https://images.unsplash.com/photo-1533241242314-ec73b22cfdc1?auto=format&fit=crop&q=80&w=400", label: "Moto-bombas" },
-                { img: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&q=80&w=400", label: "Sementes" },
-                { img: "https://images.unsplash.com/photo-1500382017468-9049fee74a62?auto=format&fit=crop&q=80&w=400", label: "Ferramentas" },
-                { img: "https://images.unsplash.com/photo-1622383529357-3fb050304616?auto=format&fit=crop&q=80&w=400", label: "Irrigação" },
-                { img: "https://images.unsplash.com/photo-1589923177891-689bb5352601?auto=format&fit=crop&q=80&w=400", label: "Catálogo Campo" },
-              ].map((item, i) => (
-                <div key={i} className="group relative rounded-xl overflow-hidden h-40 shadow-sm border border-white hover:border-brand-gold/50 transition-all">
-                  <img src={item.img} alt={item.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" referrerPolicy="no-referrer" />
-                  <div className="absolute inset-0 bg-brand-black/40 flex items-end p-3">
-                    <span className="text-[10px] text-white font-bold uppercase tracking-widest">{item.label}</span>
-                  </div>
+          <div className="max-w-4xl mx-auto">
+            <motion.div {...fadeIn}>
+              <div className="bg-brand-black text-white p-10 md:p-16 rounded-[3rem] shadow-2xl border border-brand-gold/20 relative overflow-hidden">
+                {/* Background Decor */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gold/5 blur-3xl rounded-full -mr-32 -mt-32"></div>
+                
+                <div className="relative z-10">
+                  <h3 className="text-3xl md:text-4xl font-bold text-brand-gold mb-8 uppercase tracking-[0.2em] text-center italic">Distribuição De:</h3>
+                  <ul className="grid md:grid-cols-2 gap-x-12 gap-y-4 text-base md:text-lg font-medium">
+                    {[
+                      "Mangueiras de Sucção e Rega",
+                      "Adubos e Fertilizantes",
+                      "Sementes Agrícolas",
+                      "Catanas e Enxadas",
+                      "Pulverizadores",
+                      "Botas e Luvas de Campo",
+                      "Ancinho e Picareta",
+                      "Machados e Carros de Mão",
+                      "Moto Bombas (Diversos Modelos)"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-4 text-gray-300">
+                        <div className="w-2 h-2 bg-brand-gold rounded-full shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              ))}
+              </div>
             </motion.div>
           </div>
         </div>
@@ -447,10 +434,9 @@ export default function App() {
           >
             <div className="product-card h-full bg-brand-gray text-white p-0 overflow-hidden group">
               <img 
-                src="https://images.unsplash.com/photo-1558981285-6f0c94958bb6?auto=format&fit=crop&q=80&w=800"
+                src="/img/moto.jpg"
                 alt="Motorizada Robusta 2 Rodas"
                 className="w-full h-[300px] object-cover group-hover:scale-105 transition-transform duration-1000 brightness-75"
-                referrerPolicy="no-referrer"
               />
               <div className="p-8">
                 <h3 className="text-3xl font-bold mb-4 text-brand-gold italic">Motorizadas de 2 Rodas</h3>
@@ -477,14 +463,14 @@ export default function App() {
                 title: "3 Rodas para Passageiros",
                 desc: "Conforto e segurança para transporte público e privado. Ideal para serviços de Tuk-tuk e frotas urbanas.",
                 items: ["Teto Reforçado", "Cabine Protegida", "Baixo Consumo"],
-                img: "https://images.unsplash.com/photo-1593351415075-3bac9f45c877?auto=format&fit=crop&q=80&w=600",
+                img: "/img/motode3rodas1.jpg",
                 icon: <Users size={24} />
               },
               {
                 title: "3 Rodas para Carga",
                 desc: "Capacidade e robustez para logística de mercadorias. O braço direito do comércio local em Angola.",
                 items: ["Caixa de Carga Ampla", "Suspensão Reforçada", "Motor de Alta Resiliência"],
-                img: "https://images.unsplash.com/photo-1621285096525-451e06fe3360?auto=format&fit=crop&q=80&w=600",
+                img: "/img/moto_carga.jpg",
                 icon: <BusFront size={24} />
               }
             ].map((v, i) => (
