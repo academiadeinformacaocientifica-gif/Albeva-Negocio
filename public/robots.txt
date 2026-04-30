@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://albevanegocio.com/sitemap.xml

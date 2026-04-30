@@ -24,7 +24,9 @@ import {
   Facebook,
   Instagram,
   Youtube,
-  Music
+  Music,
+  ChevronDown,
+  Quote
 } from "lucide-react";
 import { useState, FormEvent } from "react";
 
@@ -46,6 +48,7 @@ const staggerContainer = {
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success">("idle");
 
   const handleSubmit = (e: FormEvent) => {
@@ -76,19 +79,19 @@ export default function App() {
       <header className="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-brand-black rounded flex items-center justify-center">
-              <span className="text-brand-gold font-display font-bold text-xl italic font-serif">A</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display font-bold text-lg leading-none">ALBEVA</span>
-              <span className="text-[10px] text-gray-500 font-medium tracking-tighter uppercase">Comércio e Serviços, Lda</span>
-            </div>
+            <a href="/" className="flex items-center gap-3">
+              <img src="/logo.jpg" alt="ALBEVA Logo" className="w-12 h-12 object-contain rounded" />
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-lg leading-none">ALBEVA</span>
+                <span className="text-[10px] text-gray-500 font-medium tracking-tighter uppercase">Comércio e Serviços, Lda</span>
+              </div>
+            </a>
           </div>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wider">
             <a href="#produtos" className="hover:text-brand-gold transition-colors">Produtos</a>
-            <a href="#kits" className="hover:text-brand-gold transition-colors">Kits Sociais</a>
             <a href="#veiculos" className="hover:text-brand-gold transition-colors">Veículos</a>
+            <a href="#faq" className="hover:text-brand-gold transition-colors">FAQ</a>
             <a href="#contacto" className="hover:text-brand-gold transition-colors">Contacto</a>
           </nav>
 
@@ -124,8 +127,8 @@ export default function App() {
             className="md:hidden bg-white border-b border-gray-200 py-6 px-6 flex flex-col gap-4 text-center"
           >
             <a href="#produtos" onClick={() => setIsMenuOpen(false)} className="font-bold py-2">Produtos</a>
-            <a href="#kits" onClick={() => setIsMenuOpen(false)} className="font-bold py-2">Kits Sociais</a>
             <a href="#veiculos" onClick={() => setIsMenuOpen(false)} className="font-bold py-2">Veículos</a>
+            <a href="#faq" onClick={() => setIsMenuOpen(false)} className="font-bold py-2">FAQ</a>
             <a href="#contacto" onClick={() => setIsMenuOpen(false)} className="font-bold py-2">Contacto</a>
             <a href="#orcamento" onClick={() => setIsMenuOpen(false)} className="btn-primary w-full">Pedir Orçamento</a>
             <div className="flex justify-center gap-6 pt-4 border-t border-gray-100">
@@ -589,6 +592,124 @@ export default function App() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section id="faq" className="section-padding bg-gray-50">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div {...fadeIn} className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Perguntas Frequentes</h2>
+            <p className="text-gray-500">Esclareça as suas dúvidas sobre os nossos serviços e processos.</p>
+          </motion.div>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "Onde está localizada a ALBEVA?",
+                a: "Estamos sediados no Bengo, Angola, no Município do Panguila, Rua do Polivalente, Casa nº 3."
+              },
+              {
+                q: "Que tipos de mobiliário vocês oferecem?",
+                a: "Oferecemos uma linha completa de mobiliário de escritório, incluindo secretárias, cadeiras ergonómicas, armários e soluções integradas para salas de reunião e ambientes corporativos."
+              },
+              {
+                q: "Como funciona a distribuição de equipamentos agrícolas?",
+                a: "Distribuímos moto-bombas de alta performance, sistemas de irrigação e ferramentas essenciais, garantindo assistência técnica e orientação para maximizar a produtividade no campo."
+              },
+              {
+                q: "O que são os Kits de Combate à Pobreza?",
+                a: "São conjuntos estruturados de equipamentos e recursos (como kits de costura, barbearia, agricultura) desenhados para fomentar o auto-emprego e o desenvolvimento económico das comunidades locais."
+              },
+              {
+                q: "A ALBEVA faz entregas em todo o país?",
+                a: "Sim, possuímos logística própria e parcerias estratégicas para garantir que os produtos cheguem com segurança e rapidez a diversas províncias de Angola."
+              }
+            ].map((item, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm"
+              >
+                <button 
+                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                >
+                  <span className="font-bold text-brand-black">{item.q}</span>
+                  <ChevronDown className={`text-brand-gold transition-transform duration-300 ${activeFaq === index ? "rotate-180" : ""}`} size={20} />
+                </button>
+                <motion.div 
+                  initial={false}
+                  animate={{ height: activeFaq === index ? "auto" : 0, opacity: activeFaq === index ? 1 : 0 }}
+                  className="overflow-hidden"
+                >
+                  <div className="p-6 pt-0 text-gray-500 leading-relaxed border-t border-gray-50">
+                    {item.a}
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="section-padding overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-16">
+            <motion.div {...fadeIn} className="max-w-2xl">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">O que dizem os <br/>nossos <span className="text-brand-gold italic">Clientes</span></h2>
+              <p className="text-gray-500">A satisfação de quem confia na ALBEVA é o nosso maior selo de qualidade.</p>
+            </motion.div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Carlos Mendes",
+                role: "Empresário",
+                text: "A ALBEVA transformou o nosso escritório. O mobiliário é de altíssima qualidade e o serviço de montagem foi impecável."
+              },
+              {
+                name: "Ana Paula",
+                role: "Agricultora",
+                text: "As moto-bombas que adquirimos mudaram a nossa produção. Hoje conseguimos irrigar áreas que antes eram impossíveis de cultivar."
+              },
+              {
+                name: "João Dinis",
+                role: "Coordenador de Projetos",
+                text: "Os kits sociais são completos e realmente ajudam as famílias a começar o seu próprio negócio. É um impacto real na comunidade."
+              }
+            ].map((testimonial, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-gray-500/5 relative"
+              >
+                <div className="text-brand-gold/20 absolute top-8 right-8">
+                  <Quote size={40} fill="currentColor" />
+                </div>
+                <div className="flex items-center gap-1 text-brand-gold mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <span key={i}>★</span>
+                  ))}
+                </div>
+                <p className="text-gray-600 italic mb-8 relative z-10 leading-relaxed">
+                  "{testimonial.text}"
+                </p>
+                <div>
+                  <h4 className="font-bold text-brand-black">{testimonial.name}</h4>
+                  <p className="text-xs text-brand-gold font-bold uppercase tracking-widest">{testimonial.role}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Trust & Location */}
       <section id="contacto" className="section-padding">
         <div className="grid md:grid-cols-3 gap-12 text-center lg:text-left">
@@ -626,9 +747,7 @@ export default function App() {
       <footer className="bg-brand-black text-gray-400 py-12 px-6 border-t border-white/5">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-brand-gold rounded flex items-center justify-center">
-              <span className="text-brand-black font-display font-bold text-sm italic font-serif">A</span>
-            </div>
+            <img src="/logo.jpg" alt="ALBEVA Logo" className="w-10 h-10 object-contain rounded" />
             <span className="text-white font-display font-bold">ALBEVA Negócios</span>
           </div>
 
