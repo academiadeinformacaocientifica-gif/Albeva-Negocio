@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  
+  --color-brand-gold: #C89B3C;
+  --color-brand-gold-light: #E0BA6B;
+  --color-brand-black: #0A0A0A;
+  --color-brand-gray: #1F2937;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-brand-black font-sans antialiased selection:bg-brand-gold selection:text-white;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+.glass-pill {
+  @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-widest text-white;
+}
+
+.btn-primary {
+  @apply bg-brand-gold hover:bg-brand-gold-light text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg shadow-brand-gold/30 flex items-center justify-center gap-2;
+}
+
+.btn-outline {
+  @apply border-2 border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 flex items-center justify-center gap-2;
+}
+
+.section-padding {
+  @apply py-20 px-6 max-w-7xl mx-auto;
+}
+
+.product-card {
+  @apply bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col gap-4;
+}
+
+.floating-whatsapp {
+  @apply fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center;
+}
